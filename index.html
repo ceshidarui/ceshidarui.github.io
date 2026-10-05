@@ -1,0 +1,1352 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F1B2D">
+<title>AI副业人格测试 · 你是哪种搞钱体质</title>
+<style>
+:root{
+  --ink:#0F1B2D;--ink2:#243B57;--muted:#7C8CA3;
+  --brand:#FF6B35;--brand2:#FF9E4F;--deep:#0F1B2D;
+  --line:#E6EAF2;--paper:#FFFFFF;--soft:#F6F8FC;
+  --shadow:0 8px 30px rgba(15,27,45,.08);
+  --shadow2:0 16px 50px rgba(15,27,45,.18);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--ink);
+  background:linear-gradient(180deg,#F7F9FC,#EEF2F8 60%,#E9EEF7);
+  font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased}
+button,input{font:inherit}button{color:inherit;cursor:pointer}
+h1,h2,h3,p{margin-top:0}
+.hidden{display:none!important}
+.shell{width:100%;max-width:660px;margin:auto;padding:20px 16px 64px}
+
+.brandbar{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.brandbar .logo{width:34px;height:34px;border-radius:11px;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;
+  font-size:17px;box-shadow:0 6px 18px rgba(255,107,53,.32)}
+.brandbar b{font-size:14px;letter-spacing:.04em}
+.brandbar span{font-size:10.5px;color:var(--muted);letter-spacing:.18em}
+
+.card{background:var(--paper);border-radius:26px;padding:28px 24px;margin-bottom:18px;
+  box-shadow:var(--shadow);border:1px solid rgba(15,27,45,.04)}
+.hero{position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;top:-70px;right:-70px;width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,53,.16),transparent 70%)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:29px;font-weight:900;line-height:1.32;margin-bottom:10px;letter-spacing:-.5px;position:relative}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--brand),var(--brand2));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:14.5px;color:#5A6B82;line-height:1.85;margin-bottom:22px;position:relative}
+.lead b{color:var(--ink);font-weight:800}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.stat{background:var(--soft);border-radius:16px;padding:14px 12px;text-align:center}
+.stat b{display:block;font-size:17px;font-weight:900;color:var(--brand);margin-bottom:3px}
+.stat span{font-size:11.5px;color:var(--muted)}
+.notice{background:linear-gradient(135deg,#FFF6F1,#FFF9F5);border-radius:16px;padding:15px 17px;
+  font-size:13px;line-height:1.75;color:#8A5A3C;border:1px solid #FFE3D3;margin-bottom:20px}
+.notice b{color:#C24E1C;display:block;margin-bottom:4px;font-size:13.5px}
+
+.btn{width:100%;border:none;border-radius:16px;padding:16px 20px;font-weight:800;font-size:16px;
+  transition:transform .15s,box-shadow .15s,opacity .15s;letter-spacing:.02em}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;
+  box-shadow:0 10px 26px rgba(255,107,53,.34)}
+.ghost{background:var(--soft);color:var(--ink2);border:1.5px solid var(--line)}
+.actions{display:grid;gap:10px}
+
+.gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;
+  background:linear-gradient(160deg,#0F1B2D,#1B2C45 60%,#16263D)}
+.gate-box{width:min(420px,100%);text-align:center}
+.gate-mark{width:76px;height:76px;border-radius:24px;margin:0 auto 22px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));font-size:34px;
+  box-shadow:0 14px 40px rgba(255,107,53,.4)}
+.gate h1{color:#fff;font-size:25px;font-weight:900;margin-bottom:8px}
+.gate p{color:#8FA0BA;font-size:13px;line-height:1.75;margin-bottom:24px}
+#gateInput{display:block;width:100%;padding:16px;border-radius:16px;border:2px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);text-align:center;font-size:30px;font-weight:900;letter-spacing:14px;
+  color:#fff;outline:none;transition:.2s;margin-bottom:14px}
+#gateInput::placeholder{color:rgba(255,255,255,.2)}
+#gateInput:focus{border-color:var(--brand);background:rgba(255,107,53,.08);box-shadow:0 0 0 4px rgba(255,107,53,.14)}
+.gate-err{color:#FF7A7A;font-size:13px;min-height:20px;margin:10px 0 0;opacity:0;transition:.2s}
+.gate-err.show{opacity:1}
+.gate-foot{color:#5C6E88;font-size:11px;margin-top:22px;letter-spacing:.1em}
+
+.pref-list{display:flex;flex-direction:column;gap:11px;margin:20px 0 22px}
+.pref{width:100%;display:flex;align-items:center;gap:13px;padding:16px 17px;border-radius:18px;
+  background:var(--soft);border:1.5px solid var(--line);text-align:left;transition:.16s}
+.pref:active{transform:scale(.985)}
+.pref.selected{border-color:var(--brand);background:#FFF6F1;box-shadow:0 0 0 3px rgba(255,107,53,.1)}
+.pref .mark{width:40px;height:40px;flex:0 0 40px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--ink2),var(--deep));color:#fff;font-weight:900;font-size:15px}
+.pref.selected .mark{background:linear-gradient(135deg,var(--brand),var(--brand2))}
+.pref strong{display:block;font-size:15px;font-weight:800;margin-bottom:3px}
+.pref small{display:block;font-size:12px;color:var(--muted);line-height:1.5}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.qbar{background:var(--paper);border-radius:20px;padding:16px 19px;margin-bottom:16px;
+  box-shadow:var(--shadow);border:1px solid rgba(15,27,45,.04)}
+.qbar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;font-size:12.5px}
+.qbar-top .cat{font-weight:800;color:var(--brand)}
+.qbar-top .cnt{color:var(--muted);font-weight:600}
+.track{height:7px;border-radius:99px;background:#EDF1F7;overflow:hidden}
+.track i{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .4s cubic-bezier(.4,0,.2,1)}
+.qcard{background:var(--paper);border-radius:26px;padding:26px 22px 22px;box-shadow:var(--shadow);
+  border:1px solid rgba(15,27,45,.04);margin-bottom:16px}
+.qcard .tagline{display:inline-block;font-size:11.5px;font-weight:800;color:var(--brand);
+  background:#FFF3EC;padding:5px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.04em}
+.qcard h2{font-size:20px;font-weight:900;line-height:1.55;margin-bottom:22px;letter-spacing:-.2px}
+.opts{display:flex;flex-direction:column;gap:11px}
+.opt{width:100%;display:flex;align-items:flex-start;gap:12px;padding:15px 16px;border-radius:16px;
+  background:var(--soft);border:1.5px solid var(--line);text-align:left;font-size:14.5px;line-height:1.6;
+  color:#38495F;transition:.16s}
+.opt:active{transform:scale(.985)}
+.opt .k{width:22px;height:22px;flex:0 0 22px;border-radius:50%;border:2px solid #CFD8E5;
+  display:grid;place-items:center;font-size:11px;font-weight:900;color:#9AA8BC;transition:.16s;margin-top:1px}
+.opt.selected{border-color:var(--brand);background:#FFF6F1;color:#8A3D12;font-weight:700}
+.opt.selected .k{border-color:var(--brand);background:var(--brand);color:#fff}
+.qfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px}
+.qfoot button{padding:12px 18px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);
+  font-size:13.5px;font-weight:700;color:var(--ink2)}
+.qfoot button:disabled{opacity:.35}
+.autohint{flex:1;text-align:center;font-size:11.5px;color:#A8B4C6;line-height:1.4}
+.autohint.on{color:var(--brand);font-weight:700}
+
+.result-hero{border-radius:28px;padding:34px 24px 30px;text-align:center;color:#fff;margin-bottom:16px;
+  position:relative;overflow:hidden;background:linear-gradient(160deg,#101E33,#1C3050 55%,#16263D);
+  box-shadow:var(--shadow2)}
+.result-hero:before{content:"";position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+  width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,53,.28),transparent 68%)}
+.rh-sub{font-size:12px;letter-spacing:.22em;color:#8FA0BA;margin-bottom:16px;position:relative}
+.rh-seal{width:78px;height:78px;border-radius:26px;margin:0 auto 14px;display:grid;place-items:center;
+  font-size:34px;font-weight:900;background:linear-gradient(135deg,var(--brand),var(--brand2));
+  box-shadow:0 12px 34px rgba(255,107,53,.42);position:relative}
+.rh-pct{font-size:46px;font-weight:900;letter-spacing:-1px;position:relative;line-height:1.1;
+  background:linear-gradient(135deg,#FFB37A,#FF6B35);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rh-pctlabel{font-size:11.5px;color:#8FA0BA;margin-bottom:14px;position:relative}
+.rh-name{font-size:38px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px;position:relative}
+.rh-role{font-size:13px;color:#9FB0C8;margin-bottom:18px;position:relative}
+.rh-tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;position:relative}
+.rh-tag{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#FFD9C2;
+  padding:6px 14px;border-radius:20px;font-size:12.5px;font-weight:700}
+.rh-quote{margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);
+  font-size:15px;line-height:1.85;color:#D6E0EE;position:relative}
+
+.sec{background:var(--paper);border-radius:24px;padding:24px 22px;margin-bottom:14px;
+  box-shadow:var(--shadow);border:1px solid rgba(15,27,45,.04)}
+.sec h3{font-size:16px;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.sec h3 .n{width:24px;height:24px;border-radius:8px;flex:0 0 24px;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;font-size:12px;
+  display:grid;place-items:center}
+.sec p{font-size:14.5px;line-height:1.92;color:#4A5A70;margin:0}
+.sec .sub{font-size:12px;color:var(--muted);margin:-6px 0 14px;line-height:1.6}
+
+.dims{display:flex;flex-direction:column;gap:11px;margin-top:4px}
+.dim{display:grid;grid-template-columns:52px 1fr 46px;align-items:center;gap:10px;font-size:13px;color:#5A6B82}
+.dim .dbar{height:8px;border-radius:99px;background:#EDF1F7;overflow:hidden}
+.dim .dbar i{display:block;height:100%;border-radius:99px;width:0;
+  background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .8s cubic-bezier(.4,0,.2,1)}
+.dim b{font-size:11.5px;font-weight:800;color:var(--brand);text-align:right}
+
+.notes{display:flex;flex-direction:column;gap:11px;margin-top:4px}
+.note{background:var(--soft);border-radius:17px;padding:16px 17px;border:1px solid var(--line)}
+.note b{display:block;font-size:14px;font-weight:800;color:var(--ink);margin-bottom:7px}
+.note span{font-size:13.8px;line-height:1.8;color:#5A6B82}
+.note.hl{background:linear-gradient(135deg,#FFF6F1,#FFFBF8);border-color:#FFE0CE}
+.note.hl b{color:#C24E1C}
+
+.lines{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.lineq{background:linear-gradient(135deg,#FFF6F1,#FFFBF8);border-left:3px solid var(--brand);
+  border-radius:14px;padding:15px 18px;font-size:14.5px;line-height:1.85;color:#7A4A28;font-weight:600}
+
+.cta{background:linear-gradient(160deg,#101E33,#1C3050);border-radius:26px;padding:28px 24px;
+  color:#fff;margin-bottom:14px;box-shadow:var(--shadow2)}
+.cta h3{font-size:19px;font-weight:900;margin-bottom:10px}
+.cta p{font-size:13.5px;line-height:1.85;color:#A9B8CD;margin-bottom:20px}
+.cta .btn{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;
+  box-shadow:0 10px 28px rgba(255,107,53,.36)}
+.cta .fine{font-size:11px;color:#6C7E97;margin:14px 0 0;line-height:1.6;text-align:center}
+.micro{font-size:11.5px;color:#9AA8BC;text-align:center;line-height:1.7;padding:0 10px}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);max-width:calc(100% - 32px);
+  background:#101E33;color:#fff;padding:12px 20px;border-radius:16px;font-size:13.5px;line-height:1.6;
+  opacity:0;pointer-events:none;transition:.25s;z-index:60;box-shadow:0 12px 34px rgba(15,27,45,.3)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.modal{position:fixed;inset:0;z-index:70;display:flex;align-items:flex-start;justify-content:center;
+  padding:18px;background:rgba(15,27,45,.6);overflow:auto;-webkit-overflow-scrolling:touch}
+.panel{width:min(680px,100%);margin:auto;background:#fff;border-radius:24px;padding:18px;
+  box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.panel-head h2{margin:0;font-size:19px}
+.panel-close{width:42px;height:42px;border-radius:50%;border:none;background:var(--soft);
+  font-size:22px;line-height:1;color:var(--muted)}
+.panel-tip{font-size:13px;color:#5A6B82;line-height:1.7;margin-bottom:14px}
+.panel-btns{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.panel-btns .btn{flex:1 1 180px;font-size:14px;padding:13px 16px}
+.panel img{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line)}
+body.lock{overflow:hidden}
+
+@media(min-width:640px){
+  .actions{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:33px}
+  .rh-name{font-size:42px}
+}
+@media(max-width:380px){
+  .shell{padding:14px 12px 50px}
+  .card{padding:24px 18px}
+  .qcard{padding:22px 17px 18px}
+  .sec{padding:22px 17px}
+  .hero h1{font-size:25px}
+  .rh-name{font-size:32px}
+  .rh-pct{font-size:40px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body class="lock">
+
+<section class="gate" id="gate">
+  <div class="gate-box">
+    <div class="gate-mark">🔓</div>
+    <h1>访问验证</h1>
+    <p>这是一份需要授权才能查看的测试<br>请输入四位访问码解锁</p>
+    <input id="gateInput" type="tel" inputmode="numeric" maxlength="4" placeholder="····" aria-label="四位访问码">
+    <button class="btn primary" id="gateBtn">立即解锁</button>
+    <p class="gate-err" id="gateErr">访问码不对，再试一次</p>
+    <p class="gate-foot">AI SIDE HUSTLE TEST</p>
+  </div>
+</section>
+
+<main class="shell hidden" id="app">
+  <section id="intro">
+    <div class="brandbar">
+      <div class="logo">⚡</div>
+      <div><b id="brandName">AI副业人格测试</b><br><span>SIDE HUSTLE TYPE</span></div>
+    </div>
+    <div class="card hero">
+      <div class="eyebrow">下班后的第二种可能</div>
+      <h1>你是哪种<br><em>搞钱体质</em>？</h1>
+      <p class="lead">24 个真实场景选择题。<br>不测你聪不聪明，测你<b>更适合用哪种方式赚到第一笔钱</b>。</p>
+      <div class="stat-grid">
+        <div class="stat"><b>12 种</b><span>副业人格原型</span></div>
+        <div class="stat"><b>24 题</b><span>真实打工人场景</span></div>
+        <div class="stat"><b>8 维度</b><span>搞钱能力画像</span></div>
+        <div class="stat"><b>3 句话</b><span>专属行动建议</span></div>
+      </div>
+      <div class="notice">
+        <b>答题说明</b>
+        没有标准答案，也没做过副业的人一样能测。凭第一反应选最像你的那个就行，别想太久——想太久，测的就是"你以为的你"了。
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="startBtn">开始测试</button>
+        <button class="btn ghost" id="howBtn">这是怎么算出来的</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="pref" class="hidden">
+    <div class="card">
+      <div class="eyebrow">第 1 步 · 先缩小范围</div>
+      <h2 style="font-size:23px;font-weight:900;line-height:1.45;margin-bottom:8px">你现在最想搞哪种钱？</h2>
+      <p style="font-size:13px;color:#7C8CA3;line-height:1.75;margin-bottom:4px">只影响结果的候选范围，不影响题目和算分。</p>
+      <div class="pref-list">
+        <button class="pref" data-type="content">
+          <span class="mark">文</span>
+          <span><strong>内容型：靠写、靠拍、靠表达</strong><small>公众号 / 小红书 / 短视频 / 文案</small></span>
+        </button>
+        <button class="pref" data-type="service">
+          <span class="mark">单</span>
+          <span><strong>服务型：接单、帮别人做事</strong><small>代做 / 接单 / 设计 / 剪辑 / 陪跑</small></span>
+        </button>
+        <button class="pref" data-type="product">
+          <span class="mark">品</span>
+          <span><strong>产品型：做东西卖给别人</strong><small>资料包 / 工具 / 模板 / 小课</small></span>
+        </button>
+        <button class="pref" data-type="all">
+          <span class="mark">全</span>
+          <span><strong>还没想好，全都要看</strong><small>不限制范围，纯按性格匹配</small></span>
+        </button>
+      </div>
+      <div class="row2">
+        <button class="btn ghost" id="prefBack">返回</button>
+        <button class="btn primary" id="prefNext" disabled>开始答题</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div class="qbar">
+      <div class="qbar-top">
+        <span class="cat" id="qCat">场景 01</span>
+        <span class="cnt" id="qCnt">1 / 24</span>
+      </div>
+      <div class="track"><i id="qBar"></i></div>
+    </div>
+    <div class="qcard">
+      <span class="tagline" id="qTag">如果换成你</span>
+      <h2 id="qText"></h2>
+      <div class="opts" id="qOpts"></div>
+      <div class="qfoot">
+        <button id="qPrev">上一题</button>
+        <span class="autohint" id="qHint">选中后自动下一题</span>
+        <button id="qNext" disabled>下一题</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="result-hero">
+      <div class="rh-sub">YOUR SIDE HUSTLE TYPE</div>
+      <div class="rh-seal" id="rSeal">执</div>
+      <div class="rh-pct" id="rPct">92%</div>
+      <div class="rh-pctlabel">趣味契合指数 · 仅作参考</div>
+      <h1 class="rh-name" id="rName"></h1>
+      <div class="rh-role" id="rRole"></div>
+      <div class="rh-tags" id="rTags"></div>
+      <div class="rh-quote" id="rQuote"></div>
+    </div>
+    <section class="sec">
+      <h3><span class="n">1</span>你身上的搞钱底色</h3>
+      <p id="rPortrait"></p>
+    </section>
+    <section class="sec">
+      <h3><span class="n">2</span>你的八个搞钱维度</h3>
+      <p class="sub">只代表这次选择的倾向，不代表能力高低。</p>
+      <div class="dims" id="rDims"></div>
+    </section>
+    <section class="sec">
+      <h3><span class="n">3</span>从你的选择里，看见你的优势</h3>
+      <p class="sub">这些是你答题时真实暴露出来的做事方式。</p>
+      <div class="notes" id="rEvid"></div>
+    </section>
+    <section class="sec">
+      <h3><span class="n">4</span>放进现实里，你是这样的人</h3>
+      <div class="notes">
+        <div class="note hl"><b>你在人群里的位置</b><span id="rReality"></span></div>
+      </div>
+    </section>
+    <section class="sec">
+      <h3><span class="n">5</span>这份优势要小心的地方</h3>
+      <div class="notes">
+        <div class="note"><b>容易踩的坑</b><span id="rBlind"></span></div>
+        <div class="note"><b>也请照顾自己</b><span id="rCare"></span></div>
+        <div class="note"><b>给你的建议</b><span id="rAdvice"></span></div>
+      </div>
+    </section>
+    <section class="sec">
+      <h3><span class="n">6</span>送你的三句话</h3>
+      <div class="lines" id="rLines"></div>
+    </section>
+    <div class="cta">
+      <h3 id="ctaTitle"></h3>
+      <p id="ctaText"></p>
+      <button class="btn" id="ctaBtn"></button>
+      <p class="fine" id="ctaFine"></p>
+    </div>
+    <div class="actions" style="margin-bottom:16px">
+      <button class="btn primary" id="saveBtn">保存结果长图</button>
+      <button class="btn ghost" id="againBtn">重新测一次</button>
+    </div>
+    <p class="micro" id="microTip"></p>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal hidden" id="modal" role="dialog" aria-modal="true">
+  <div class="panel">
+    <div class="panel-head">
+      <h2>保存结果长图</h2>
+      <button class="panel-close" id="modalClose" aria-label="关闭">×</button>
+    </div>
+    <p class="panel-tip" id="modalTip">正在生成图片…</p>
+    <div class="panel-btns">
+      <button class="btn primary" id="shareBtn" disabled>系统分享 / 保存</button>
+      <button class="btn ghost" id="dlBtn" disabled>下载图片</button>
+    </div>
+    <p class="panel-tip">长按下方图片，选"保存图片"或"存储到照片"。如果长按没反应，就用上面的按钮。</p>
+    <img id="preview" class="hidden" alt="AI副业人格测试结果">
+  </div>
+</div>
+
+<script>
+// ===== 12 种 AI 副业人格原型 =====
+// vec 顺序: 执行/表达/教学/死磕/变现/协作/独行/抗挫
+var ARCH = {
+  executor:{key:'executor',label:'落地执行者',tags:['行动','交付','靠谱'],type:'服务型',
+    vec:[96,62,58,74,72,68,66,84],
+    portrait:'你不缺想法，缺的是把想法落到日程表上的那股劲。别人还在纠结选哪个工具，你已经把第一个版本交出去了。你相信"做完"永远比"做好"更接近钱，先跑通再优化。',
+    blind:'一头扎进执行，回头才发现方向从一开始就偏了。',
+    reality:'同事临时甩来的活、客户突然加的需求，最后往往是你默默兜住。',
+    advice:'动手前花十分钟写清楚要交付什么、给谁看，能省下三天返工。'},
+  writer:{key:'writer',label:'内容表达者',tags:['文字','感染','审美'],type:'内容型',
+    vec:[66,97,72,70,74,66,78,72],
+    portrait:'你能把一段模糊的感受、一件琐碎的小事，变成别人愿意读完的文字。别人不知道怎么开口的事，到你这里就有了形状和温度。这是天生的流量体质。',
+    blind:'内容做得漂亮，却常常忘了问一句：这篇东西要带来什么结果？',
+    reality:'你发的内容总有人留言说"这就是我想说但说不出口的话"。',
+    advice:'每写完一篇，逼自己补一句行动指令，内容才有出口。'},
+  teacher:{key:'teacher',label:'知识拆解者',tags:['体系','讲清','耐心'],type:'内容型',
+    vec:[70,76,97,76,68,78,62,80],
+    portrait:'你有一种稀缺能力：把复杂的东西讲成人话。你愿意一遍遍解释，也享受看到别人从"听不懂"到"原来这么简单"的那一瞬间。知识到你手里就变成了产品。',
+    blind:'容易陷入无限备课，课程大纲改了八版，一节课还没开出去。',
+    reality:'朋友遇到问题第一个找你，因为你讲的永远比别人清楚。',
+    advice:'先卖一次只有三节课的小课，比憋一个三十节的完美课值钱得多。'},
+  researcher:{key:'researcher',label:'深挖研究者',tags:['验证','专业','专注'],type:'内容型',
+    vec:[74,58,80,97,62,60,88,76],
+    portrait:'你受不了"大概是吧"这种答案。你会翻遍资料、反复测试，直到把一件事吃透。你要的不是快，是经得起追问的结论。这种深度是做久了别人抄不走的东西。',
+    blind:'研究过深，成果迟迟不出来，市场早就换了一轮。',
+    reality:'你是身边人遇到专业问题时的"人工搜索引擎"。',
+    advice:'给自己设一个交付截止日，到点就发，不完美也发。'},
+  operator:{key:'operator',label:'流量经营者',tags:['变现','转化','节奏'],type:'内容型',
+    vec:[80,74,66,68,99,76,58,82],
+    portrait:'你天生对"什么能卖、怎么卖出去"敏感。你看得懂数据背后的情绪，也知道标题换两个字转化率能差多少。你不是在做内容，你是在做一门生意。',
+    blind:'太在意转化，会让人觉得你只想着赚他的钱。',
+    reality:'你发内容时，总会下意识想这条能不能带来咨询和订单。',
+    advice:'先给对方三次免费价值，再谈一次钱，成交反而更快。'},
+  connector:{key:'connector',label:'连接组织者',tags:['人脉','资源','信任'],type:'服务型',
+    vec:[68,80,74,66,82,99,54,78],
+    portrait:'你擅长让不同的人愿意坐到一起。你知道谁需要什么、谁能提供什么，也愿意当那个牵线的人。你攒下的信任本身，就是可以变现的资产。',
+    blind:'忙着撮合各方，自己那一份产出容易被挤到深夜。',
+    reality:'你在群里一发消息，总有人积极响应，因为你平时真的帮过他们。',
+    advice:'每个月留一件只属于自己的项目，别把所有时间都拿去组别人的局。'},
+  soloer:{key:'soloer',label:'独立手艺人',tags:['自由','边界','深耕'],type:'服务型',
+    vec:[76,70,60,84,74,46,99,72],
+    portrait:'你不喜欢开会、不喜欢汇报、更不喜欢被人管着做事。你宁愿一个人安安静静把手艺磨到极致，用作品说话，而不是用关系说话。自由比规模对你更重要。',
+    blind:'长期单干，会让你错过那些必须协作才能拿到的大机会。',
+    reality:'你最舒服的状态，是戴上耳机，一个人把活干完。',
+    advice:'一个人做产品，但要有一群人给反馈，别把自己关成孤岛。'},
+  designer:{key:'designer',label:'审美创作者',tags:['画面','感知','气质'],type:'内容型',
+    vec:[70,84,64,72,78,64,80,70],
+    portrait:'你对画面、配色、排版有天然的直觉。别人看到的是"好看"，你看到的是留白、重心和情绪。你能用视觉让一个普通产品显得贵十倍。这是AI时代最不好替代的能力。',
+    blind:'容易在细节上无限打磨，为0.5秒的动效熬三个通宵。',
+    reality:'朋友做海报第一个找你，因为经你手的图就是不一样。',
+    advice:'设定一条"够用就发"的标准线，别让完美拖住第一单。'},
+  analyst:{key:'analyst',label:'数据推演者',tags:['逻辑','规律','效率'],type:'产品型',
+    vec:[78,60,70,92,84,66,82,74],
+    portrait:'你不靠感觉做决定，靠数据。你会建表、会看转化漏斗、会算每个环节的投入产出。别人凭热闹入场，你靠一张表格判断该不该做。你能把副业当项目管。',
+    blind:'太依赖数据，会让你错过那些暂时还没有数据的新机会。',
+    reality:'你手机里存着好几个表格，记着每一笔收入和每一次尝试的效果。',
+    advice:'给新方向留10%的试错预算，有些机会数据还没长出来。'},
+  builder:{key:'builder',label:'工具建造者',tags:['造物','效率','自动化'],type:'产品型',
+    vec:[88,58,72,88,76,70,86,80],
+    portrait:'看到重复劳动你就手痒，忍不住想把它自动化。你会为了省下每天十分钟，花三天写一个脚本。你不满足于用工具，你想造工具——这正是产品型副业的底子。',
+    blind:'容易沉迷于造工具本身，造完发现没人愿意用。',
+    reality:'你电脑里躺着十几个自己写的小工具，一半只有你自己在用。',
+    advice:'动手之前先问一句：这东西除了我，还有第二个人需要吗？'},
+  responder:{key:'responder',label:'服务响应者',tags:['耐心','共情','口碑'],type:'服务型',
+    vec:[82,72,70,72,80,82,60,90],
+    portrait:'你能把客户那些含糊、琐碎、反复变的需求接住，还让对方觉得被尊重。你不怕麻烦，你怕的是让人觉得没被认真对待。你的口碑就是这么一笔一笔攒起来的。',
+    blind:'什么都答应，会让你被琐事填满，没时间做真正值钱的事。',
+    reality:'客户转介绍来的单子，往往比你自己辛苦找的还多。',
+    advice:'给自己定一条服务边界，超出的部分要敢于报价或者拒绝。'},
+  resilient:{key:'resilient',label:'长线坚持者',tags:['韧性','复利','定力'],type:'服务型',
+    vec:[84,66,68,82,70,62,84,99],
+    portrait:'你不是最有天赋的那个，但你是发得最久的那个。别人三个月没爆就转行，你能做到第三百天。你相信复利，相信时间最终会奖励那些还没离场的人。',
+    blind:'过分坚持，会让你在不值得的方向上耗太久，把沉没成本当成信仰。',
+    reality:'你朋友圈里每天更新的人，慢慢只剩下你自己一个。',
+    advice:'每三个月给自己做一次"要不要停"的复盘，坚持也要有方向感。'}
+};
+
+// ===== 12 个副业情境主题 =====
+// dims: 四种应对风格各自归属的维度
+var TOPICS = [
+  {name:'选方向',   styles:['先干起来','先写出来','先拆解同行','先查清数据'], dims:['执行','表达','教学','死磕']},
+  {name:'没灵感',   styles:['先发一版','翻找感受','研究同类','分析规律'],     dims:['执行','表达','教学','死磕']},
+  {name:'学工具',   styles:['上手就用','发出来问','整理成教程','吃透原理'],   dims:['执行','表达','教学','死磕']},
+  {name:'遇到卡点', styles:['换个法子','写下来理','找人问','自己测通'],       dims:['执行','表达','协作','死磕']},
+  {name:'第一单',   styles:['主动报价','先做样品','讲清价值','算清成本'],     dims:['变现','表达','教学','死磕']},
+  {name:'时间不够', styles:['定死每日量','砍掉不产出的','找人分担','只做最关键'], dims:['执行','变现','协作','独行']},
+  {name:'没人看',   styles:['按节奏继续','换角度重写','研究流量规则','复盘数据'], dims:['抗挫','表达','变现','死磕']},
+  {name:'被质疑',   styles:['用结果回应','写清楚立场','找同伴撑着','闷头做'], dims:['抗挫','表达','协作','独行']},
+  {name:'赚到钱',   styles:['扩大规模','写成内容','总结成方法','存下再投入'], dims:['变现','表达','教学','执行']},
+  {name:'有人想学', styles:['直接开课','先免费带','做体系课','自己再练'],     dims:['变现','协作','教学','死磕']},
+  {name:'客户难搞', styles:['按需交付','耐心聊需求','拉群对接','定清边界'],   dims:['执行','协作','协作','独行']},
+  {name:'长期坚持', styles:['每天固定做','记录成长','组队监督','相信复利'],   dims:['执行','表达','协作','抗挫']}
+];
+
+// ===== 场景库：12 主题 × 5 个场景 =====
+// 每个场景: [题干, [风格0文案, 风格1文案, 风格2文案, 风格3文案]]
+var SCENES = [
+// —— 主题0 选方向 ——
+['刷到好几个人靠AI做头像赚钱，你有点心动但不知道从哪下手',
+ ['先做十个发出去，边做边调','先写一篇自己的真实想法发出来','先把几个成功案例拆开看结构','先查清这个赛道有多少人在做、单价多少']],
+['想搞AI副业，但手上的工具一大堆，不知道先学哪个',
+ ['挑一个今天就上手用起来','挑一个能立刻做出内容发表的','挑一个能整理成教程教人的','挑一个值得长期吃透的深耕']],
+['同事说AI能接单赚钱，你也心动了，但完全没头绪',
+ ['注册个号直接开始接第一单','先把自己的经历写成一篇试水','先看同行是怎么一步步做起来的','先调研这个市场真实的需求有多少']],
+['你每天只有下班后两小时，能做副业的方向又太多',
+ ['选一个先跑一周，用结果说话','选一个能马上产出内容的','选一个能快速做出教学样本的','选一个值得长期投入、有复利的']],
+['有人推荐你做AI绘画，也有人说做AI写作更赚钱',
+ ['两个都试一周，让结果替我选','选自己最擅长表达的那个','选自己能讲清楚的那个','选数据上更靠谱的那个']],
+
+// —— 主题1 没灵感 ——
+['坐了一小时，一个字没写出来，但今天还得更新',
+ ['硬着头皮先写一版发出去','翻相册找今天的真实感受','去看看同类账号最近在讲什么','把过去数据好的内容翻出来分析']],
+['想发内容，又觉得自己的生活太平淡，没什么可讲的',
+ ['把今天下班路上看到的一段拍出来发掉','把今天一句真实的情绪写下来','把别人的选题换个角度讲一遍','统计一下自己哪类内容反响最好']],
+['选题卡住了，翻遍热点都不知道该蹭哪一个',
+ ['随便挑一个先做出来再说','挑一个自己真的有话说的','挑一个同行验证过能跑通的','挑一个正在涨的数据方向']],
+['要产出第二十条内容了，越写越觉得跟前面重复',
+ ['先按模板出一版，保证不断更','换个视角把老选题重写一遍','去研究别人是怎么避免同质化的','把二十条的数据拉出来做个对比']],
+
+// —— 主题2 学工具 ——
+['新出的AI工具大家都会了，你也想赶紧学会',
+ ['打开就用，遇到问题现场查','用已经会的部分先做条内容出来','边用边整理成一篇入门教程','把每个功能背后的原理搞明白']],
+['买了个AI课，学了两节就卡住进行不下去了',
+ ['跳过听不懂的，先往下用起来','把学到的立刻写成笔记发出去','把卡住的地方去问会的人','回头把基础补扎实再继续']],
+['同事会的AI工具比你多，你有点着急',
+ ['挑一个最有用的先练熟','把自己会的那点发出来交流','整理成一份清单分享给同事','把最常用的那个吃透到极致']],
+['工具更新太快，刚学会就又换代了',
+ ['先跟着用起来，边用边适应','把这次变化写成内容帮别人省事','整理成新旧功能对照说明','抓住底层不变的逻辑，别的随它变']],
+
+// —— 主题3 遇到卡点 ——
+['用AI做的视频总是很假，参数调了很久还是不行',
+ ['换个工具换个思路接着试','写下来理一遍，到底哪一步不对','去群里问做过的人是怎么弄的','自己一遍遍测参数，直到对为止']],
+['接的单子客户一直不满意，已经改了五版',
+ ['继续改，改到客户点头为止','把客户真正想要的写下来对齐','请同行帮我看看问题出在哪','逐帧对比，找出到底差在哪个细节']],
+['账号做了一段时间，数据一直纹丝不动',
+ ['换个方向继续发，不能停在原地','把这段时间的感受认真写出来','去问已经做起来的同行怎么破的局','把每条数据拉出来找规律']],
+['用AI做出来的东西总感觉差一口气，又说不清差在哪',
+ ['先做出来发出去，看真实反馈','把不满意的地方写下来逐条对比','请有审美的人帮我看看','把好的案例逐帧拆开研究']],
+
+// —— 主题4 第一单 ——
+['第一个客户来问价，你不知道该报多少',
+ ['先报一个价试水，成不成看运气','先做个样品给他看，再谈钱','把能带给他什么结果讲清楚','算清自己的时间成本再定价格']],
+['有人想让你帮他做AI内容，但你从没收过钱',
+ ['先接一单，价格低点也要跑通','免费做一版给他看效果','跟他讲清这事能帮他省下多少','按工时算出合理报价再谈']],
+['客户说你的报价太贵了',
+ ['降一点价，先把这一单拿下来','讲清楚我能帮他带来什么结果','拆开给他看每一项分别值多少钱','坚持定价，接不了这单也没关系']],
+['第一次接单，客户要的东西你其实没做过',
+ ['接下来，边做边学','先跟他说清楚哪些能做到、哪些不能','找会的人一起把这单完成','先自己研究透了再接']],
+
+// —— 主题5 时间不够 ——
+['下班已经十点，今天的内容还没做',
+ ['定死的最低量，今天必须完成','把最花时间又不产出的环节砍掉','把能外包的部分找人分担','只做今天最关键的那一件']],
+['工作一忙起来，副业就断更了',
+ ['再忙也留半小时，做一点点也算','调整内容形式，把产出成本降下来','找个人一起做，互相补位','把副业缩到最小可行状态']],
+['家里事情多，根本挤不出时间',
+ ['把碎片时间都用来做小事','把家务和副业结合的内容拍出来','让家人理解并帮着分担一部分','只保留最不可替代的那一步']],
+['一天想干八件事，结果一件都没做成',
+ ['列个清单，一件一件勾掉','先写下来，写完就知道该做什么','找个伙伴互相盯着做完','只挑收益最高的那件先做']],
+
+// —— 主题6 没人看 ——
+['发了二十条，一条都没爆',
+ ['按原节奏继续发，不信等不到','换一个角度重写最用心的那条','去研究爆款的标题和封面规律','把二十条数据拉出来逐条复盘']],
+['同期开始的人都起来了，你还在原地',
+ ['继续按自己的节奏更新','把这种落差和感受写出来','去问起来的那个人是怎么做的','分析自己和他到底差在哪个环节']],
+['精心做的一条，播放量只有个位数',
+ ['再做一条，从量的积累上找答案','把那条拆了换成文章再发一次','研究平台给流量的规则','复盘这条到底哪个环节松了']],
+['坚持一个月，感觉完全没被看见',
+ ['继续，一个月说明不了什么','把这个月的坚持记录发出来','去找同样在坚持的人结伴','把一个月的数据做个总结']],
+
+// —— 主题7 被质疑 ——
+['老公说你不务正业，让你别折腾了',
+ ['用第一笔收入来回应他','写一篇讲清楚自己想法的文章','找同样在做的人互相打气','不解释，闷头继续做']],
+['有人评论说你做的东西一看就是AI做的，很水',
+ ['直接做出更好的东西打脸','认真写一篇回应讲清我的看法','拉到同伴群里一起讨论怎么应对','不回应，继续打磨作品']],
+['朋友说你被骗了，AI根本不赚钱',
+ ['把已经赚到的截图甩出来','把自己的路径写成内容说明白','找已经做成的同行取取经','懒得解释，自己心里有数']],
+['网上有人说AI副业都是割韭菜',
+ ['继续做，用结果说话','写一篇客观的内容讲清真实情况','联合同行一起做点真实案例','不参与争论，专心做自己的事']],
+
+// —— 主题8 赚到钱 ——
+['副业赚到第一笔一千块，你打算怎么办',
+ ['加大投入，争取下个月翻倍','把这笔钱怎么来的写出来','把方法整理成一篇干货','先存一部分，剩下的继续投']],
+['做的项目开始稳定出单了',
+ ['扩大规模，多找人手一起做','把成功经验发出来吸引更多客户','做成课程教给想学的人','把流程标准化，方便复制']],
+['有笔钱到手，你是先享受还是先投入',
+ ['先投入，让它滚起来更重要','把这次的收获写成复盘内容','拿一部分请教过的人吃饭道谢','留足安全垫再谈扩张']],
+['第一个月就赚了三千，你有点飘',
+ ['趁热多接几单','把月度复盘写成内容','总结出一套能复制的方法','把三千块做好规划继续滚']],
+
+// —— 主题9 有人想学 ——
+['有粉丝私信你说想跟你学，你怎么办',
+ ['报个价，直接开课收徒','先免费带一波，看他能不能坚持','先做一套系统的课程出来','先自己把这件事再练熟一遍']],
+['很多人问你怎么用AI，你已经回不过来了',
+ ['做个付费咨询，筛选真实需求','先发一条统一的解答内容','做一份FAQ让新人自己去看','先把常见问题的答案打磨好']],
+['有人想跟你合作开课，但你还没准备好',
+ ['先答应下来，边做边准备','先讲一场直播测测大家反应','先把课程大纲做出来再谈','先确认自己的内容够不够硬']],
+['教别人比自己做还累，你还想继续吗',
+ ['继续，教人本身也是一条赚钱的路','把教学过程做成内容，一举两得','拉几个人分工，一人教一块','只教自己最拿手的那部分']],
+
+// —— 主题10 客户难搞 ——
+['客户一晚上发来三十条消息催进度',
+ ['按他的要求尽快交付','耐心一条条回复，把需求理清','组个群把相关的人拉进来对接','跟他约定好回复时间和边界']],
+['客户的需求改来改去，你已经改了八次',
+ ['他改我就改，客户满意优先','跟他坐下来把真实需求聊透','请个中间人帮着协调一下','明确告诉他这是最后一次修改']],
+['客户想让你做超出约定范围的事',
+ ['顺手做了，多个朋友多条路','跟他讲清楚额外那部分的价值','介绍别的同行来分担这部分','礼貌拒绝，按约定范围来']],
+['客户很难沟通，但你很需要这一单的钱',
+ ['忍着做完，钱到手再说','多花点时间理解他到底想要什么','找个沟通好的人来对接','守住底线，不合适就不接']],
+
+// —— 主题11 长期坚持 ——
+['做了三个月，还是没看到明显结果',
+ ['每天固定产出，继续熬','把这三个月的成长记录下来发出来','找几个人组队互相监督','相信复利，慢就是快']],
+['身边的人陆续都放弃了，只剩你还在做',
+ ['他们放弃是他们的事，我继续','把这段孤独写出来，会有人懂的','去认识还在坚持的新同伴','按自己的节奏慢慢走']],
+['第二年还在原地，你开始怀疑自己',
+ ['坚持本身就是门槛，继续做','把复盘写出来，边写边想清楚','找做出结果的人问一次路','把目标拆小，先完成一个小周期']],
+['有人告诉你这个方向已经过时了',
+ ['做完了再说，不听杂音','把判断写出来，让时间验证','找人一起验证这个方向','自己调研清楚再决定继不继续']]
+];
+
+// ===== 结果页文案池 =====
+
+// 每个主题 × 4 种风格 → 一句"你这么做说明什么"
+var EV_TEXT = [
+ ['说明你不靠完美计划启动，靠真实的动作找方向。','说明你需要先把感受讲出来，思路才会通。','说明你习惯先看懂规则再入场，不做糊涂买卖。','说明你不赌运气，只信自己查证过的事实。'],
+ ['说明你相信"完成"比"完美"更接近钱。','说明你的素材来自真实生活，不是硬编的。','说明你会站在别人的肩膀上看路，少走弯路。','说明你用数据代替感觉，判断什么值得做。'],
+ ['说明你上手快，不被工具本身绊住。','说明你学习的方式是公开输出，边学边赚。','说明你有把知识打包成产品的能力。','说明你追求的是别人一时抄不走的深度。'],
+ ['说明你不认死理，路堵了就换一条。','说明你靠"写下来"把混乱整理成方向。','说明你敢开口求助，不硬扛。','说明你有把自己当实验品的狠劲。'],
+ ['说明你敢开价，不把自己放在免费的位置上。','说明你知道先用作品建立信任，再谈钱。','说明你能把价值讲明白，这是稀缺能力。','说明你算得清成本和底线，不做亏本买卖。'],
+ ['说明你靠纪律推进，不靠状态。','说明你懂得砍掉不产出的动作，这是赚钱的敏感度。','说明你愿意把事情分出去，把人变成杠杆。','说明你懂得收窄，专注做一件真正值钱的事。'],
+ ['说明你的韧性来自节奏感，不是硬撑。','说明你会把低落本身变成内容，反败为胜。','说明你懂平台规则，不做无效努力。','说明你复盘得下去，不会在同一个坑里摔两次。'],
+ ['说明你只认结果，不把力气耗在解释上。','说明你愿意把立场写清楚，不怕被误解。','说明你懂得找人结伴，孤独期也能撑住。','说明你内核稳，别人的噪音进不来。'],
+ ['说明你看得见规模，想的是怎么把它滚大。','说明你会把过程变成资产，一鱼两吃。','说明你有把经验沉淀成方法的能力。','说明你懂得留安全垫，这是能活下来的关键。'],
+ ['说明你不回避谈钱，教学本身就是一门生意。','说明你会先付出，再让人自然地留下。','说明你追求的是可复制的体系，不是一次性的热闹。','说明你先把自己打磨扎实，再对外承诺。'],
+ ['说明你的可靠本身就是招牌。','说明你愿意花时间理解对方真正要的是什么。','说明你懂调动资源，不一个人硬扛。','说明你有边界感，这能筛掉消耗你的人。'],
+ ['说明你靠的是日拱一卒，不是一时爆发。','说明你会把坚持可视化，让时间替你说话。','说明你知道有人一起走才走得远。','说明你懂复利，愿意等那个拐点。']
+];
+
+// 每个原型 → 三句原创台词（第一句是通用寄语，后面两句来自原型）
+var ARCH_LINES = {
+  executor:['今天的行动，就是明天能拿出手的东西。','先做出来，答案会在做的过程里自己出现。','别等了，你的第一条内容就该在今天发出去。'],
+  writer:['你能把说不清的感受，变成别人愿意读的东西。','真实比华丽更值钱，你的生活就是素材库。','写下去，会有人因为你的字停下来。'],
+  teacher:['能把复杂讲简单的人，永远有人愿意付钱。','你的耐心，就是别人走不出的那段路。','先教会一个人，再想怎么教会一千个。'],
+  researcher:['你要的不是快，是经得起追问的答案。','深挖是一种慢，但挖到位就没人能替。','把研究变成作品，别让它只留在你的笔记里。'],
+  operator:['看得懂人心和数据的人，永远不缺生意的入口。','转化不是套路，是你替对方想清楚了。','把流量变成信任，才是真正的本事。'],
+  connector:['你攒下的每一份信任，未来都会变成机会回来。','愿意成就别人的人，路会越走越宽。','你的价值，藏在你认识并愿意帮的人里。'],
+  soloer:['你不用活成别人期待的节奏。','一个人也能做成事，但别关上门。','自由的代价是自律，你比谁都清楚。'],
+  designer:['你的眼睛看到的东西，很多人一辈子都看不到。','审美是AI最不容易替代的那部分能力。','把美做成产品，它就是最贵的溢价。'],
+  analyst:['你靠数据做判断，这让你比大多数人少犯很多错。','别急着入场，你会等到更好的位置。','不是所有事都能被算清，但你已经比大多数人清醒。'],
+  builder:['你不满足于用工具，你想造工具。','效率是你最值钱的天赋。','你解决问题的方式，本身就可以卖。'],
+  responder:['你的耐心，是别人愿意回头找你的理由。','把每一个客户当回事，口碑会替你接单。','服务不是迁就，是你懂得什么叫做尊重。'],
+  resilient:['你不是最有天赋的，但你是还没离场的那个。','时间会奖励那些还在的人。','再坚持一程，拐点往往就在你想放弃的那一站之后。']
+};
+
+// 鼓励语（照顾自己那一段，按原型微调）
+var ARCH_CARE = {
+  executor:'你可以拼，但身体不是无限续杯的。做完一件，记得给自己留一口气。',
+  writer:'写出来的东西是给别人的，情绪先是自己的。累的时候先照顾好自己。',
+  teacher:'你总在帮别人少走弯路，也可以允许自己走得慢一点。',
+  researcher:'深度需要耐心，但耐心也需要休息来续电。',
+  operator:'你很会替别人算账，也记得替自己算一次。',
+  connector:'你总在成全别人的局，也要留一个局是为你自己组的。',
+  soloer:'独处是你的充电方式，但难过的时候，别一个人扛。',
+  designer:'你在意每一个细节，也别让完美成为伤害自己的理由。',
+  analyst:'数据能算出最优解，但你的感受也值得被记录一次。',
+  builder:'你总想着怎么让效率更高，也允许自己浪费一个下午。',
+  responder:'你接住了所有人的需求，也要接住你自己那一个。',
+  resilient:'坚持很了不起，但休息不是放弃，是为了走更远。'
+};
+
+// 类型说明文案
+var TYPE_ROLE_TEXT = {
+  content:'内容型副业',
+  service:'服务型副业',
+  product:'产品型副业',
+  all:'综合型副业'
+};
+
+// CTA：按原型给的专属清单描述
+var CTA_BY_ARCH = {
+  executor:'你适合从"今天就能交付"的单子切进去。清单里给你的是：3个最快能接的第一单类型、交付模板、报价区间参考。',
+  writer:'你适合从"把我的经历写出来"开始。清单里给你的是：适合内容型的3个选题钩子、AI辅助写作的提示词模板、首发平台的选择逻辑。',
+  teacher:'你适合把已有的经验做成课。清单里给你的是：一门三节课的最小课程结构、定价区间、怎么找到第一批学员。',
+  researcher:'你适合做"深到别人撤不了"的内容。清单里给你的是：怎么把研究转成可售产品的路径、资料整理工具、防止无限打磨的交付节点表。',
+  operator:'你适合做流量和转化的生意。清单里给你的是：从0到第一笔订单的转化路径、标题和封面的测试方法、免费到付费的过渡节点。',
+  connector:'你适合做人脉变现的生意。清单里给你的是：怎么把你的资源整理成可售服务、帮人对接的收费方式、维护信任的具体动作。',
+  designer:'你适合做审美溢价的生意。清单里给你的是：AI绘画与设计的主流工具组合、接单平台和定价参考、作品集怎么搭。',
+  analyst:'你适合用数据做决策型副业。清单里给你的是：怎么用表格管理副业收入、判断一个方向值不值得做的指标清单、最小成本试错法。',
+  builder:'你适合造工具卖工具。清单里给你的是：把重复劳动变成工具的思路、工具变现的几种形式、怎么判断有没有人愿意买。',
+  soloer:'你适合一个人做的服务型副业。清单里给你的是：不用露脸不用社交的接单方式、一个人能跑通的流程、避免孤岛的几个社群。',
+  responder:'你适合做服务口碑型副业。清单里给你的是：服务型副业的标准流程、怎么设置自己的服务边界、让客户转介绍的三个动作。',
+  resilient:'你适合做长线复利的副业。清单里给你的是：能日更的最小内容量、三个月一次的复盘模板、判断该坚持还是该转向的标准。'
+};
+
+</script>
+<script>
+(function(){
+"use strict";
+
+/* ===== 可配置区（想改就改这里） ===== */
+var CONFIG = {
+  ACCESS_CODE: "1319",
+  BRAND: "觉醒君CAHGEE",
+  WECHAT_TIP: "公众号「觉醒君CAHGEE」回复「清单」",
+  CTA_TITLE: "你的第一份 AI 副业工具清单",
+  CTA_FINE: "免费领取 · 不推销课程"
+};
+
+var DIMS = ["执行","表达","教学","死磕","变现","协作","独行","抗挫"];
+var ASKS = ["如果换成你，你会？","你更愿意怎么做？","这种情况下你会？","哪种做法更像你？",
+            "你会选哪一种？","你更倾向哪种？","换你会怎么处理？","你最可能怎么做？"];
+
+var TYPE_MAP = {
+  content:{arch:["writer","teacher","designer","researcher","operator"]},
+  service:{arch:["executor","responder","designer","connector","soloer"]},
+  product:{arch:["teacher","builder","operator","analyst","researcher"]},
+  all:{arch:["executor","writer","teacher","researcher","operator","connector",
+             "soloer","designer","analyst","builder","responder","resilient"]}
+};
+
+/* ===== 题库构建 ===== */
+function buildBank(){
+  var bank = [];
+  SCENES.forEach(function(scene, si){
+    var topic = si % 12;
+    scene[1].forEach(function(text, styleIdx){
+      bank.push({
+        sid: si, topic: topic, cat: TOPICS[topic].name,
+        stem: scene[0], style: styleIdx, text: text
+      });
+    });
+  });
+  return bank;
+}
+var BANK = buildBank();
+
+function shuffled(arr){
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+/* 抽 24 题：12 主题各 2 题，同场景只用一次，选项打乱 */
+function pickQuestions(){
+  var byTopic = {};
+  BANK.forEach(function(q){ (byTopic[q.topic] = byTopic[q.topic] || []).push(q); });
+  var picked = [];
+  for (var t = 0; t < 12; t++){
+    var pool = byTopic[t] || [];
+    var byScene = {};
+    pool.forEach(function(q){ (byScene[q.sid] = byScene[q.sid] || []).push(q); });
+    var sceneIds = shuffled(Object.keys(byScene));
+    sceneIds.slice(0, 2).forEach(function(sid){
+      var group = byScene[sid];
+      var q = group[Math.floor(Math.random() * group.length)];
+      var order = shuffled([0,1,2,3]);
+      var opts = order.map(function(s){
+        return { s: s, text: SCENES[q.sid][1][s], dim: TOPICS[q.topic].dims[s] };
+      });
+      picked.push({
+        topic: q.topic, cat: TOPICS[q.topic].name, stem: q.stem,
+        ask: ASKS[Math.floor(Math.random() * ASKS.length)], opts: opts
+      });
+    });
+  }
+  return shuffled(picked);
+}
+
+/* ===== 算分 ===== */
+function calc(questions, answers, type){
+  var counts = {};
+  for (var t = 0; t < 12; t++) counts[t] = [0,0,0,0];
+  questions.forEach(function(q, i){
+    var a = answers[i];
+    if (a === null || a === undefined) return;
+    counts[q.topic][q.opts[a].s]++;
+  });
+
+  var hit = {}, seen = {};
+  questions.forEach(function(q, i){
+    q.opts.forEach(function(o){ seen[o.dim] = (seen[o.dim] || 0) + 1; });
+    var a = answers[i];
+    if (a === null || a === undefined) return;
+    var d = q.opts[a].dim;
+    hit[d] = (hit[d] || 0) + 1;
+  });
+  var dimScores = DIMS.map(function(d){
+    var s = seen[d] || 0;
+    return s ? Math.round(100 * (hit[d] || 0) / s) : 0;
+  });
+
+  var pool = (TYPE_MAP[type] || TYPE_MAP.all).arch;
+  var ranked = pool.map(function(key){
+    var v = ARCH[key].vec;
+    var fit = 0;
+    for (var t = 0; t < 12; t++){
+      var c = counts[t];
+      var total = c[0]+c[1]+c[2]+c[3];
+      if (!total) continue;
+      var s = 0;
+      c.forEach(function(n, style){
+        if (!n) return;
+        var di = DIMS.indexOf(TOPICS[t].dims[style]);
+        s += n * (v[di] / 100);
+      });
+      fit += s / total;
+    }
+    // 用整体维度 cos 相似度做次要项，避免同分
+    var dot=0,ma=0,mb=0;
+    DIMS.forEach(function(d,i){
+      var a=dimScores[i]/100,b=v[i]/100;
+      dot+=a*b; ma+=a*a; mb+=b*b;
+    });
+    var cos = dot / (Math.sqrt(ma) * Math.sqrt(mb) || 1);
+    return { key:key, fit: fit, cos: cos };
+  }).sort(function(a,b){
+    return (b.fit - a.fit) || (b.cos - a.cos);
+  });
+
+  var winner = ranked[0].key;
+  var arch = ARCH[winner];
+  var v = arch.vec;
+
+  var dot=0,ma=0,mb=0;
+  DIMS.forEach(function(d,i){
+    var a=dimScores[i]/100,b=v[i]/100;
+    dot+=a*b; ma+=a*a; mb+=b*b;
+  });
+  var cos = dot / (Math.sqrt(ma) * Math.sqrt(mb) || 1);
+  var pct = Math.max(74, Math.min(96, Math.round(62 + cos * 36)));
+
+  // 证据：与原型最契合的 3 条选择，按主题去重
+  var cand = [];
+  questions.forEach(function(q, i){
+    var a = answers[i];
+    if (a === null || a === undefined) return;
+    var o = q.opts[a];
+    var di = DIMS.indexOf(o.dim);
+    cand.push({ q:q, o:o, di:di, sc: v[di] / 100, i:i });
+  });
+  cand.sort(function(a,b){ return b.sc - a.sc; });
+  var evid = [], used = {};
+  cand.forEach(function(c){
+    if (evid.length >= 3) return;
+    if (used[c.q.topic]) return;
+    used[c.q.topic] = 1;
+    evid.push({
+      title: c.q.cat + " · 你选了「" + c.o.text + "」",
+      body: EV_TEXT[c.q.topic][c.o.s]
+    });
+  });
+
+  return {
+    arch: arch, dimScores: dimScores, pct: pct, evid: evid,
+    near: ranked.slice(1,3).map(function(r){ return ARCH[r.key].label; }),
+    type: type
+  };
+}
+
+/* ===== DOM 与流程 ===== */
+var $ = function(s){ return document.querySelector(s); };
+var state = { type:null, index:0, answers:[], Q:[], result:null, timer:null };
+
+function show(id){
+  ["intro","pref","quiz","result"].forEach(function(k){
+    var el = document.getElementById(k);
+    if (el) el.classList.add("hidden");
+  });
+  var t = document.getElementById(id);
+  if (t) t.classList.remove("hidden");
+  window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+function toast(msg, ms){
+  var el = $("#toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t = setTimeout(function(){ el.classList.remove("show"); }, ms || 2600);
+}
+
+/* —— 访问门 —— */
+function unlock(){
+  var input = $("#gateInput"), err = $("#gateErr");
+  if (input.value.trim() !== CONFIG.ACCESS_CODE){
+    err.classList.add("show");
+    input.value = ""; input.focus();
+    return;
+  }
+  $("#gate").classList.add("hidden");
+  $("#app").classList.remove("hidden");
+  document.body.classList.remove("lock");
+  err.classList.remove("show");
+  window.scrollTo(0,0);
+}
+$("#gateBtn").onclick = unlock;
+$("#gateInput").addEventListener("keydown", function(e){ if (e.key === "Enter") unlock(); });
+(function(){
+  var p = new URLSearchParams(location.search).get("code");
+  if (p){ $("#gateInput").value = p; setTimeout(unlock, 150); }
+})();
+
+/* —— 开场 —— */
+$("#brandName").textContent = CONFIG.BRAND + " · AI副业人格测试";
+$("#micoTip"); $("#microTip").textContent =
+  "本测试为趣味性自我探索，不构成职业建议或收入承诺。答案只在本地计算，不会上传。";
+$("#ctaTitle").textContent = CONFIG.CTA_TITLE;
+$("#ctaFine").textContent = CONFIG.CTA_FINE;
+$("#ctaBtn").textContent = "领取我的专属清单";
+$("#startBtn").onclick = function(){ show("pref"); };
+$("#howBtn").onclick = function(){
+  toast("根据你24次选择，计算8个维度的倾向，再和12种副业人格的画像对比，最接近的那个就是你。不涉及任何隐私数据。", 6000);
+};
+
+/* —— 偏好 —— */
+var prefBtns = document.querySelectorAll(".pref");
+Array.prototype.forEach.call(prefBtns, function(btn){
+  btn.onclick = function(){
+    Array.prototype.forEach.call(prefBtns, function(x){ x.classList.remove("selected"); });
+    btn.classList.add("selected");
+    state.type = btn.dataset.type;
+    $("#prefNext").disabled = false;
+  };
+});
+$("#prefBack").onclick = function(){ show("intro"); };
+$("#prefNext").onclick = function(){
+  state.Q = pickQuestions();
+  state.index = 0;
+  state.answers = new Array(state.Q.length).fill(null);
+  show("quiz");
+  renderQ();
+};
+
+/* —— 答题 —— */
+function renderQ(){
+  var i = state.index, q = state.Q[i];
+  var n = i + 1, total = state.Q.length, pct = Math.round(n / total * 100);
+  $("#qCat").textContent = "场景 · " + q.cat;
+  $("#qCnt").textContent = n + " / " + total;
+  $("#qBar").style.width = pct + "%";
+  $("#qTag").textContent = q.ask;
+  $("#qText").textContent = q.stem;
+
+  var list = $("#qOpts");
+  list.innerHTML = "";
+  q.opts.forEach(function(o, j){
+    var b = document.createElement("button");
+    b.className = "opt" + (state.answers[i] === j ? " selected" : "");
+    b.setAttribute("data-i", j);
+    b.innerHTML = '<span class="k">' + "ABCD"[j] + '</span><span>' + o.text + '</span>';
+    b.onclick = function(){ choose(j); };
+    list.appendChild(b);
+  });
+
+  var done = state.answers[i] !== null;
+  $("#qHint").textContent = done ? "已选择，可以改，也可以继续" : "选中后自动进入下一题";
+  $("#qHint").classList.toggle("on", done);
+  $("#qNext").disabled = !done;
+  $("#qNext").textContent = (i === total - 1) ? "看结果" : "下一题";
+}
+
+function choose(j){
+  var i = state.index;
+  state.answers[i] = j;
+  var opts = document.querySelectorAll("#qOpts .opt");
+  Array.prototype.forEach.call(opts, function(x){ x.classList.remove("selected"); });
+  opts[j].classList.add("selected");
+  $("#qNext").disabled = false;
+  $("#qHint").textContent = (i === state.Q.length - 1) ? "已选择，正在生成你的画像…" : "已选择，正在进入下一题…";
+  $("#qHint").classList.add("on");
+  clearTimeout(state.timer);
+  state.timer = setTimeout(next, 430);
+}
+
+function next(){
+  clearTimeout(state.timer);
+  if (state.answers[state.index] === null) return;
+  if (state.index < state.Q.length - 1){
+    state.index++;
+    renderQ();
+    document.getElementById("quiz").scrollIntoView({ behavior:"smooth", block:"start" });
+  } else {
+    finish();
+  }
+}
+$("#qNext").onclick = next;
+$("#qPrev").onclick = function(){
+  clearTimeout(state.timer);
+  if (state.index === 0){ show("pref"); return; }
+  state.index--;
+  renderQ();
+};
+
+/* —— 出结果 —— */
+function finish(){
+  if (state.answers.indexOf(null) !== -1){
+    toast("还有题目没选完，先把剩下的选掉");
+    return;
+  }
+  var d = calc(state.Q, state.answers, state.type);
+  state.result = d;
+  var a = d.arch;
+
+  $("#rSeal").textContent = a.label.slice(0,1);
+  $("#rPct").textContent = d.pct + "%";
+  $("#rName").textContent = a.label;
+  $("#rRole").textContent = a.type + " · " + (a.tags.join(" · "));
+  $("#rTags").innerHTML = a.tags.map(function(t){
+    return '<span class="rh-tag">' + t + '</span>';
+  }).join("");
+  $("#rQuote").textContent = "「" + ARCH_LINES[a.key][0] + "」";
+  $("#rPortrait").textContent = a.portrait;
+
+  $("#rDims").innerHTML = DIMS.map(function(dim, i){
+    var s = d.dimScores[i];
+    var lab = s >= 60 ? "很强" : s >= 35 ? "中等" : "偏弱";
+    return '<div class="dim"><span>' + dim + '</span>' +
+           '<span class="dbar"><i data-w="' + s + '"></i></span>' +
+           '<b>' + lab + '</b></div>';
+  }).join("");
+
+  $("#rEvid").innerHTML = d.evid.map(function(e){
+    return '<div class="note"><b>' + e.title + '</b><span>' + e.body + '</span></div>';
+  }).join("");
+
+  var nearTxt = d.near.length
+    ? "顺带一提，你的选择里也有" + d.near.join("、") + "的影子，它们是同一批做事方式的不同侧面。"
+    : "";
+  $("#rReality").textContent = a.reality + " " + nearTxt;
+  $("#rBlind").textContent = a.blind;
+  $("#rCare").textContent = ARCH_CARE[a.key];
+  $("#rAdvice").textContent = a.advice;
+
+  $("#rLines").innerHTML = ARCH_LINES[a.key].map(function(x){
+    return '<div class="lineq">“' + x + '”</div>';
+  }).join("");
+
+  $("#ctaText").innerHTML = CTA_BY_ARCH[a.key] + "<br><br>领取方式：" + CONFIG.WECHAT_TIP;
+
+  show("result");
+  setTimeout(function(){
+    var bars = document.querySelectorAll("#rDims .dbar i");
+    Array.prototype.forEach.call(bars, function(b){
+      b.style.width = b.getAttribute("data-w") + "%";
+    });
+  }, 120);
+}
+
+$("#ctaBtn").onclick = function(){
+  toast("领取方式：" + CONFIG.WECHAT_TIP + "（在小红书私信我也可以）", 5200);
+};
+
+$("#againBtn").onclick = function(){
+  state.type = null; state.index = 0; state.answers = []; state.Q = []; state.result = null;
+  Array.prototype.forEach.call(prefBtns, function(x){ x.classList.remove("selected"); });
+  $("#prefNext").disabled = true;
+  show("intro");
+};
+
+/* ===== 结果长图 ===== */
+var prepared = null, preparing = null;
+function wrap(c, text, maxW, size, weight, lineH){
+  c.font = (weight||400) + " " + size + "px -apple-system,\"PingFang SC\",\"Microsoft YaHei\",sans-serif";
+  var out = [], cur = "";
+  for (var i = 0; i < String(text||"").length; i++){
+    var ch = String(text)[i];
+    if (ch === "\n"){ out.push(cur); cur = ""; continue; }
+    var test = cur + ch;
+    if (cur && c.measureText(test).width > maxW){ out.push(cur); cur = ch; }
+    else cur = test;
+  }
+  if (cur) out.push(cur);
+  return out.length ? out : [""];
+}
+
+function buildImage(){
+  var W = 1080, pad = 64, cardW = W - pad * 2;
+  var canvas = document.createElement("canvas");
+  var c = canvas.getContext("2d");
+  var d = state.result, a = d.arch;
+  var Y = 0;
+  var blocks = [];
+
+  function add(h){ blocks.push(h); }
+
+  // 预排版：先算出总高度
+  var body = [];
+  function para(text, opts){
+    var size = (opts && opts.size) || 28;
+    var weight = (opts && opts.weight) || 400;
+    var lh = (opts && opts.lh) || Math.round(size * 1.7);
+    var lines = wrap(c, text, cardW - 40, size, weight);
+    return { lines: lines, size: size, weight: weight, lh: lh };
+  }
+
+  var heroH = 700;
+  var secs = [];
+
+  function para(text, opts){
+    var size = (opts && opts.size) || 28;
+    var weight = (opts && opts.weight) || 400;
+    var lh = (opts && opts.lh) || Math.round(size * 1.7);
+    var lines = wrap(c, text, cardW - 40, size, weight);
+    return { lines: lines, size: size, weight: weight, lh: lh };
+  }
+
+  secs.push({ title:"1. 你身上的搞钱底色", body:[{b:para(a.portrait)}], h:0 });
+  secs.push({ title:"2. 你的八个搞钱维度", body:[], dims:true, h:0 });
+  secs.push({ title:"3. 从你的选择里看见你的优势",
+    body: d.evid.map(function(e){ return { t:e.title, b:para(e.body, {size:26, lh:46}) }; }), h:0 });
+  secs.push({ title:"4. 放进现实里，你是这样的人",
+    body:[{ t:"你在人群里的位置", b:para(a.reality, {size:26, lh:46}) }], h:0 });
+  secs.push({ title:"5. 这份优势要小心的地方",
+    body:[
+      { t:"容易踩的坑", b:para(a.blind, {size:26, lh:46}) },
+      { t:"也请照顾自己", b:para(ARCH_CARE[a.key], {size:26, lh:46}) },
+      { t:"给你的建议", b:para(a.advice, {size:26, lh:46}) }
+    ], h:0 });
+  secs.push({ title:"6. 送你的三句话",
+    body: ARCH_LINES[a.key].map(function(x){ return { q:x }; }), h:0 });
+
+  function secHeight(s){
+    var h = 120;
+    if (s.dims) h += 8 * 56;
+    s.body.forEach(function(b){
+      if (b.q){ h += para(b.q, {size:27, weight:600, lh:48}).lines.length * 48 + 56; return; }
+      if (b.t){ h += wrap(c, b.t, cardW - 60, 27, 800).length * 40 + 18; }
+      if (b.b){ h += b.b.lines.length * b.b.lh + 20; }
+    });
+    return h + 56;
+  }
+  var ctaH = 240;
+  var total = heroH + 40;
+  secs.forEach(function(s){ s.h = secHeight(s); total += s.h + 26; });
+  total += ctaH + 130;
+
+  // 在足够高的画布上绘制，最后裁切到精确高度（避免 resize 清空画布）
+  canvas.width = W; canvas.height = total + 400;
+
+  // 背景
+  var g = c.createLinearGradient(0, 0, 0, total);
+  g.addColorStop(0, "#F7F9FC"); g.addColorStop(1, "#EDF1F8");
+  c.fillStyle = g; c.fillRect(0, 0, W, canvas.height);
+
+  // 顶部主视觉
+  var hg = c.createLinearGradient(0, 0, W, heroH);
+  hg.addColorStop(0, "#101E33"); hg.addColorStop(.55, "#1C3050"); hg.addColorStop(1, "#16263D");
+  c.fillStyle = hg; c.fillRect(0, 0, W, heroH);
+  var rg = c.createRadialGradient(W/2, 80, 10, W/2, 80, 340);
+  rg.addColorStop(0, "rgba(255,107,53,.34)"); rg.addColorStop(1, "rgba(255,107,53,0)");
+  c.fillStyle = rg; c.fillRect(0, 0, W, heroH);
+
+  var FONT = '-apple-system,"PingFang SC","Microsoft YaHei",sans-serif';
+
+  c.textAlign = "center";
+  c.fillStyle = "#8FA0BA";
+  c.font = "700 24px " + FONT;
+  c.fillText("Y O U R   S I D E   H U S T L E   T Y P E", W/2, 104);
+
+  // 印章
+  var sx = W/2 - 62, sy = 156, sw = 124;
+  var sg = c.createLinearGradient(sx, sy, sx+sw, sy+sw);
+  sg.addColorStop(0, "#FF6B35"); sg.addColorStop(1, "#FF9E4F");
+  c.fillStyle = sg;
+  if (c.roundRect){ c.beginPath(); c.roundRect(sx, sy, sw, sw, 40); c.fill(); }
+  else c.fillRect(sx, sy, sw, sw);
+  c.fillStyle = "#fff";
+  c.font = "900 62px " + FONT;
+  c.fillText(a.label.slice(0,1), W/2, sy + 86);
+
+  var pg2 = c.createLinearGradient(W/2-140, 0, W/2+140, 0);
+  pg2.addColorStop(0, "#FFB37A"); pg2.addColorStop(1, "#FF6B35");
+  c.fillStyle = pg2;
+  c.font = "900 84px " + FONT;
+  c.fillText(d.pct + "%", W/2, 428);
+
+  c.fillStyle = "#8FA0BA";
+  c.font = "400 22px " + FONT;
+  c.fillText("趣味契合指数 · 仅作参考", W/2, 468);
+
+  c.fillStyle = "#fff";
+  c.font = "900 66px " + FONT;
+  c.fillText(a.label, W/2, 560);
+
+  c.fillStyle = "#9FB0C8";
+  c.font = "400 24px " + FONT;
+  c.fillText(a.type + "副业 · " + a.tags.join(" · "), W/2, 610);
+
+  // 引用句
+  var qline = "「" + ARCH_LINES[a.key][0] + "」";
+  var qlines = wrap(c, qline, cardW - 60, 26, 500);
+  c.fillStyle = "#D6E0EE";
+  c.font = "500 26px " + FONT;
+  qlines.slice(0,2).forEach(function(ln, li){ c.fillText(ln, W/2, 664 + li * 38); });
+
+  var Y = heroH + 70;
+
+  c.textAlign = "left";
+  secs.forEach(function(s){
+    var top = Y;
+    c.fillStyle = "#FFFFFF";
+    if (c.roundRect){ c.beginPath(); c.roundRect(pad, top, cardW, s.h, 36); c.fill(); }
+    else c.fillRect(pad, top, cardW, s.h);
+
+    var ix = pad + 30, iy = top + 52, iw = cardW - 60;
+
+    c.fillStyle = "#FF6B35";
+    c.font = "900 30px " + FONT;
+    c.fillText(s.title, ix, iy + 8);
+    iy += 56;
+
+    if (s.dims){
+      DIMS.forEach(function(dim, i){
+        var v = d.dimScores[i];
+        c.fillStyle = "#5A6B82";
+        c.font = "700 25px " + FONT;
+        c.fillText(dim, ix, iy + 26);
+        var bx = ix + 100, bw = iw - 180;
+        c.fillStyle = "#EDF1F7";
+        if (c.roundRect){ c.beginPath(); c.roundRect(bx, iy + 12, bw, 16, 8); c.fill(); }
+        else c.fillRect(bx, iy + 12, bw, 16);
+        var fw = Math.max(8, bw * v / 100);
+        var bg2 = c.createLinearGradient(bx, 0, bx + bw, 0);
+        bg2.addColorStop(0, "#FF6B35"); bg2.addColorStop(1, "#FF9E4F");
+        c.fillStyle = bg2;
+        if (c.roundRect){ c.beginPath(); c.roundRect(bx, iy + 12, fw, 16, 8); c.fill(); }
+        else c.fillRect(bx, iy + 12, fw, 16);
+        c.fillStyle = "#FF6B35";
+        c.font = "800 24px " + FONT;
+        c.textAlign = "right";
+        c.fillText(v >= 60 ? "很强" : v >= 35 ? "中等" : "偏弱", ix + iw, iy + 28);
+        c.textAlign = "left";
+        iy += 56;
+      });
+    } else {
+      s.body.forEach(function(b){
+        if (b.q){
+          var ql = para(b.q, {size:27, weight:600, lh:48}).lines;
+          var qh = ql.length * 48 + 28;
+          c.fillStyle = "#FFF6F1";
+          if (c.roundRect){ c.beginPath(); c.roundRect(ix, iy, iw, qh, 20); c.fill(); }
+          else c.fillRect(ix, iy, iw, qh);
+          c.fillStyle = "#FF6B35";
+          c.fillRect(ix, iy, 6, qh);
+          c.fillStyle = "#7A4A28";
+          c.font = "600 27px " + FONT;
+          ql.forEach(function(ln, li){ c.fillText(ln, ix + 26, iy + 42 + li * 48); });
+          iy += qh + 22;
+          return;
+        }
+        if (b.t){
+          c.fillStyle = "#101E33";
+          c.font = "800 27px " + FONT;
+          var tl = wrap(c, b.t, iw, 27, 800);
+          tl.forEach(function(ln, li){ c.fillText(ln, ix, iy + 24 + li * 40); });
+          iy += tl.length * 40 + 14;
+        }
+        if (b.b){
+          c.fillStyle = "#5A6B82";
+          c.font = "400 " + b.b.size + "px " + FONT;
+          b.b.lines.forEach(function(ln, li){
+            c.fillText(ln, ix, iy + b.b.size + li * b.b.lh);
+          });
+          iy += b.b.lines.length * b.b.lh + 16;
+        }
+      });
+    }
+    Y = top + s.h + 26;
+  });
+
+  // CTA
+  var cg = c.createLinearGradient(0, Y, 0, Y + ctaH);
+  cg.addColorStop(0, "#101E33"); cg.addColorStop(1, "#1C3050");
+  c.fillStyle = cg;
+  if (c.roundRect){ c.beginPath(); c.roundRect(pad, Y, cardW, ctaH, 36); c.fill(); }
+  else c.fillRect(pad, Y, cardW, ctaH);
+  c.fillStyle = "#fff";
+  c.font = "900 34px " + FONT;
+  c.textAlign = "center";
+  c.fillText(CONFIG.CTA_TITLE, W/2, Y + 92);
+  c.fillStyle = "#A9B8CD";
+  c.font = "400 24px " + FONT;
+  c.fillText("领取方式：" + CONFIG.WECHAT_TIP, W/2, Y + 148);
+  c.fillStyle = "#6C7E97";
+  c.font = "400 20px " + FONT;
+  c.fillText("趣味性自我探索 · 不构成职业建议或收入承诺", W/2, Y + 200);
+  Y += ctaH + 46;
+
+  c.fillStyle = "#9AA8BC";
+  c.font = "400 22px " + FONT;
+  c.fillText(CONFIG.BRAND + " · AI副业人格测试", W/2, Y + 6);
+  Y += 60;
+
+  // 裁切到精确高度
+  var out = document.createElement("canvas");
+  out.width = W; out.height = Y;
+  out.getContext("2d").drawImage(canvas, 0, 0);
+  return out;
+}
+
+function prepare(){
+  if (prepared) return Promise.resolve(prepared);
+  if (preparing) return preparing;
+  preparing = new Promise(function(res, rej){
+    setTimeout(function(){
+      try { res(buildImage()); } catch(e){ rej(e); }
+    }, 40);
+  }).then(function(canvas){
+    return new Promise(function(res, rej){
+      canvas.toBlob(function(blob){
+        if (!blob){ rej(new Error("blob failed")); return; }
+        var url = URL.createObjectURL(blob);
+        var file = null;
+        try { file = new File([blob], "AI副业人格测试.png", { type:"image/png" }); } catch(e){}
+        prepared = { canvas:canvas, blob:blob, url:url, file:file };
+        res(prepared);
+      }, "image/png");
+    });
+  }).then(function(v){ preparing = null; return v; }, function(e){ preparing = null; throw e; });
+  return preparing;
+}
+
+function openModal(){ $("#modal").classList.remove("hidden"); document.body.classList.add("lock"); }
+function closeModal(){ $("#modal").classList.add("hidden"); document.body.classList.remove("lock"); }
+
+$("#modalClose").onclick = closeModal;
+$("#modal").onclick = function(e){ if (e.target === $("#modal")) closeModal(); };
+
+function showAsset(a){
+  $("#preview").src = a.url;
+  $("#preview").classList.remove("hidden");
+  $("#modalTip").textContent = "长按图片保存，或点下面的按钮。";
+  $("#dlBtn").disabled = false;
+  $("#shareBtn").disabled = !(navigator.canShare && a.file && navigator.canShare({ files:[a.file] }));
+}
+
+$("#saveBtn").onclick = function(){
+  if (!state.result){ toast("请先完成测试"); return; }
+  prepared = null;
+  openModal();
+  $("#preview").classList.add("hidden");
+  $("#modalTip").textContent = "正在生成图片，稍等一下…";
+  $("#dlBtn").disabled = true; $("#shareBtn").disabled = true;
+  prepare().then(function(a){ showAsset(a); },
+    function(){ $("#modalTip").textContent = "图片没生成出来，退出重进再试一次。测试结果还在，不用重新答题。"; });
+};
+
+$("#dlBtn").onclick = function(){
+  if (!prepared) return;
+  var link = document.createElement("a");
+  link.href = prepared.url;
+  link.download = "AI副业人格测试.png";
+  document.body.appendChild(link); link.click(); link.remove();
+  $("#modalTip").textContent = "已发起下载。如果相册里没有，看看文件管理里的下载目录。";
+};
+
+$("#shareBtn").onclick = function(){
+  if (!prepared || !prepared.file) return;
+  if (!navigator.canShare || !navigator.canShare({ files:[prepared.file] })){
+    $("#modalTip").textContent = "这个浏览器不支持系统分享，长按图片保存即可。";
+    return;
+  }
+  navigator.share({ files:[prepared.file], title:"AI副业人格测试" })
+    .then(function(){ $("#modalTip").textContent = "已打开系统面板，选存储图像即可。"; })
+    .catch(function(){ $("#modalTip").textContent = "已取消。图片还在下面，可以长按保存。"; });
+};
+
+})();
+</script>
+</body>
+</html>
